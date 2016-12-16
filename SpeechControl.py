@@ -33,10 +33,12 @@ class SpeechController:
     def listenForStart(self):
         if self.inputmode == 'input':
             micIn = ''
-            input('>')
-            micIn = self.listen().lower()
-            print(micIn)
-            return micIn
+            x = input('>')
+            if x == '':
+                micIn = self.listen().lower()
+                print(micIn)
+                return micIn
+            return x
         if self.inputmode == 'continous':
             micIn = self.listen().lower()
             print(micIn)
@@ -53,6 +55,7 @@ class SpeechController:
     def say(self, txt):
         txt = str(txt)
         self.lastsaid = txt
+        print(txt)
         try:
             if os.name == 'nt':
                 try:
@@ -61,6 +64,10 @@ class SpeechController:
                 except Exception:
                     print("Get Jampal TTS at http://jampal.sourceforge.net/ptts.html")
             elif os.name == 'posix':
-                return_code = subprocess.call("say " + txt, shell=True)
+                audio_file = "hello.mp3"
+                tts = gTTS(text=txt, lang="en-uk")
+                tts.save(audio_file)
+                return_code = subprocess.call(
+                    ["afplay", "-r", "1.3", audio_file])
         except KeyboardInterrupt:
             pass

@@ -6,6 +6,7 @@ from quizlet import QuizletClient
 from random import randint
 import SpeechControl as SC
 import RequestControl as RC
+import wikipedia
 
 
 class KnowledgeController:
@@ -24,7 +25,7 @@ class KnowledgeController:
         self.RequestHandler = RC.RequestController()
         self.junkQueries = {'whatis': ['what is', 'who is']}
 
-    def ask(self, response):
+    def askGoogle(self, response):
 
         query = response['resolvedQuery']
 
@@ -71,6 +72,32 @@ class KnowledgeController:
             descriptions = 'Not found'
 
         return descriptions
+
+    def ask(self, response):
+
+        query = response['resolvedQuery']
+
+        # print(response)
+
+        if 'parameters' in response:
+            query = response['parameters']['q'].lower()
+            rtype = response['parameters']['request_type'].lower()
+
+        ### Query Formatting ###
+
+        if rtype in self.junkQueries:
+            for junk in self.junkQueries[rtype]:
+                query = query.replace(junk, '')
+        else:
+            query = rtype + ' ' + query
+
+        ###                  ###
+
+        print('Requesting Query... ' + query)
+
+        resp = wikipedia.summary(query, sentences=2)
+
+        return resp
 
     def getWeather(self, response):
 
