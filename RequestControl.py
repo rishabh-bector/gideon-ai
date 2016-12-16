@@ -32,6 +32,6 @@ class RequestController:
 
         print(output)
 
-        ###   Check for API Speech response ###
+       
 
         return output
