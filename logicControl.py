@@ -30,13 +30,15 @@ class LogicController:
                 continue
             output = self.RequestHandler.handle_request(
                 query)  # handle request
+
             ###   Check for API Speech response ###
+
             try:
                 actionOutput = output['result']['fulfillment']['speech']
             except Exception:
                 actionOutput = 'Sorry, my neural core seems to have malfunctioned.'
 
-            # print('actionOutput : ' + actionOutput)
+            ###   If None, complete action   ###
 
             if actionOutput == '':
                 print('No API Speech Response')
