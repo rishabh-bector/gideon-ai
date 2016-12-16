@@ -97,7 +97,10 @@ class KnowledgeController:
 
         resp = wikipedia.summary(query, sentences=2)
 
-        resp = resp.replace(resp[resp.index('('):resp.index(')') + 1], '')
+        try:
+            resp = resp.replace(resp[resp.index('('):resp.index(')') + 1], '')
+        except Exception:
+            pass
 
         return resp
 
