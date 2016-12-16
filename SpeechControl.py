@@ -51,6 +51,8 @@ class SpeechController:
             self.say("I'm listening")
             micIn = self.listen().lower()
             return micIn
+        else:
+            self.inputmode == 'input'
 
     def say(self, txt):
         txt = str(txt)

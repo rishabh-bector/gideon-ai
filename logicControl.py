@@ -26,6 +26,8 @@ class LogicController:
     def run(self):
         while True:
             query = self.Speech.listenForStart()  # listen for query
+            if query == '' or query == 'error:audio':
+                continue
             output = self.RequestHandler.handle_request(
                 query)  # handle request
             ###   Check for API Speech response ###
