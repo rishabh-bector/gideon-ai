@@ -33,7 +33,8 @@ class LogicController:
             except Exception:
                 actionOutput = 'Sorry, my neural core seems to have malfunctioned.'
 
-            print(actionOutput)
+            # print('actionOutput : ' + actionOutput)
+
             if actionOutput == '':
                 print('No API Speech Response')
 

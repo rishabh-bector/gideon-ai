@@ -97,6 +97,8 @@ class KnowledgeController:
 
         resp = wikipedia.summary(query, sentences=2)
 
+        resp = resp.replace(resp[resp.index('('):resp.index(')') + 1], '')
+
         return resp
 
     def getWeather(self, response):
