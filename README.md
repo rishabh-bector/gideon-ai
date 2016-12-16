@@ -13,4 +13,4 @@ __Usage__:
 Just run logicControl.py! The default input mode is "input", in which you receive a prompt (>), which you press enter on to dictate voice commands. Have fun! 
 
 # USING QUIZLET:
-Give Gideon a command similar to "Quiz me on {topic}", and he will quiz you. If you want to stop, answer "interrupt". Further, if you want Gideon to repeat something, say "interrupt", and then "can you say that again?". He will gladly comply.
+Give Gideon a command similar to "Quiz me on {topic}", and he will quiz you. If you want Gideon to repeat something, say "interrupt", and then "can you say that again?". He will gladly comply.
