@@ -8,16 +8,17 @@ A python AI made by Rishabh Bector and Leo Orshansky using api.ai, Google Speech
 
 __Installation__:
 
-Dependencies:
-gtts,
-speech_recognition,
-apiai
+Make sure you have git installed, then run these commands.
 
-Most of these can be installed with `pip`.
+`git clone https://github.com/rishabh-bector/gideon-ai/`
+
+`cd gideon-ai`
+
+`python setup.py install`
 
 __Usage__:
 
-run `python3 logicControl.py` 
+run `python -m gideonai` 
 
 The default input mode is 'input'. Hit enter, then say something into the mic. If you don't have access to a mic then type what you want to say and press enter. Have Fun!
 
