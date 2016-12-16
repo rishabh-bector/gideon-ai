@@ -201,7 +201,7 @@ var/
 sdist/
 develop-eggs/
 .installed.cfg
-
+.mp3
 # Installer logs
 pip-log.txt
 
