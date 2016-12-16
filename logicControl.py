@@ -20,7 +20,8 @@ class LogicController:
                         'wisdom': self.Knowledge.ask,
                         'quizlet': self.Knowledge.quiz,
                         'switchmode': self.Speech.switchmode,
-                        'sayagain': self.Speech.sayagain}
+                        'sayagain': self.Speech.sayagain,
+                        'getjoke': self.Knowledge.getJoke}
 
     def run(self):
         while True:

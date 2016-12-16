@@ -7,6 +7,7 @@ from random import randint
 import SpeechControl as SC
 import RequestControl as RC
 import wikipedia
+import pyjokes
 
 
 class KnowledgeController:
@@ -152,3 +153,6 @@ class KnowledgeController:
             if answer.lower() == 'stop playing':
                 return 'Ok. Good Luck!'
         return "Good luck!"
+
+    def getJoke(self, response):
+        return pyjokes.get_joke()
