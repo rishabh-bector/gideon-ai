@@ -4,12 +4,10 @@ import pyowm
 from pprint import pprint
 from quizlet import QuizletClient
 from random import randint
-import SpeechControl as SC
-import RequestControl as RC
+from gideonai import SpeechControl as SC
+from gideonai import RequestControl as RC
 import wikipedia
 import pyjokes
-
-
 
 
 class KnowledgeController:

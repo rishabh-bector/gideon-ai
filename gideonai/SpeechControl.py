@@ -10,6 +10,8 @@ if os.name == 'nt':
     subprocess.call("md audio", shell=True)
 elif os.name == 'posix':
     subprocess.call("rm -rf audio;mkdir -p audio", shell=True)
+
+
 class SpeechController:
 
     def __init__(self, name, language):
@@ -67,7 +69,8 @@ class SpeechController:
         print(txt)
         try:
             if os.name == 'nt':
-                audio_file = "audio\hello_" + str(random.randint(1, 1000)) + ".mp3"
+                audio_file = "audio\hello_" + \
+                    str(random.randint(1, 1000)) + ".mp3"
                 tts = gTTS(text=txt, lang="en-uk")
                 tts.save(audio_file)
                 mixer.music.load(audio_file)

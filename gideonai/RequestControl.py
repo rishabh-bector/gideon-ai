@@ -1,5 +1,5 @@
-import SpeechControl as SC
-import KnowledgeControl as KC
+from gideonai import SpeechControl as SC
+from gideonai import KnowledgeControl as KC
 import apiai
 
 
@@ -31,7 +31,5 @@ class RequestController:
             print('Error in API response')
 
         print(output)
-
-       
 
         return output

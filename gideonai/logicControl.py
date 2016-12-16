@@ -1,10 +1,10 @@
 import apiai
 import json
 
-import SpeechControl as SC
-import KnowledgeControl as KC
-import RequestControl as RC
-import MiscControl as MC
+from gideonai import SpeechControl as SC
+from gideonai import KnowledgeControl as KC
+from gideonai import RequestControl as RC
+from gideonai import MiscControl as MC
 
 import re
 
