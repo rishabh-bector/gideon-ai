@@ -2,9 +2,10 @@ import requests
 import json
 import pyowm
 from pprint import pprint
-import quizlet
+from quizlet import QuizletClient
 from random import randint
 import SpeechControl as SC
+import RequestControl as RC
 
 
 class KnowledgeController:
@@ -17,10 +18,10 @@ class KnowledgeController:
         self.Speech = SC.SpeechController('Gideon', 'en-uk')
         self.quizletkey = 'wJ5qBU5SmcTa4NTq92jAHh'
         self.weatherkey = 'c51599edbd4fdc796ccd41fcf12b80c0'
-        self.quizlet = quizlet.QuizletClient(
+        self.quizlet = QuizletClient(
             client_id=self.quizletid, login=self.quizletkey)
         self.owm = pyowm.OWM(self.weatherkey)
-
+        self.RequestHandler = RC.RequestController()
         self.junkQueries = {'whatis': ['what is', 'who is']}
 
     def ask(self, response):
@@ -86,7 +87,6 @@ class KnowledgeController:
     def quiz(self, response):
 
         name = response['parameters']['quizname']
-        self.Speech.say('Starting quiz ... ' + name)
         setid = 0
         for sett in self.quizlet.api.search.sets.get(params={'q': name})[
                 'sets']:
@@ -99,8 +99,11 @@ class KnowledgeController:
         my_set = self.quizlet.api.sets.get(setid)
         my_terms = my_set['terms']
         setcount = my_set["term_count"]
+        x = randint(0, setcount - 1)
         for i in range(setcount):
-            x = randint(0, setcount - 1)
+            x += 1
+            if x == setcount:
+                x = 0
             term = my_terms[x]['term']
             definition = my_terms[x]['definition']
             self.Speech.say("Definition,,,,, " +
@@ -109,8 +112,11 @@ class KnowledgeController:
             print(answer)
             if answer.lower() in term.lower():
                 self.Speech.say("You are correct! The term is " + term)
+            elif answer.lower() == "interrupt":
+                query = self.Speech.listen()
+                self.RequestHandler.handle_request(query)
             else:
                 self.Speech.say("Incorrect! The term is " + term)
-            if 'stop playing' in answer.lower():
+            if answer.lower() == 'stop playing':
                 return 'Ok. Good Luck!'
         return "Good luck!"
