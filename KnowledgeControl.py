@@ -9,14 +9,7 @@ import RequestControl as RC
 import wikipedia
 import pyjokes
 
-'''
-KnowledgeController Supports:
 
-- Querying Google
-- Querying Wikipedia
-- Weather Forecasting
-
-'''
 
 
 class KnowledgeController:
