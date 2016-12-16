@@ -27,18 +27,18 @@ class LogicController:
             query = self.Speech.listenForStart()  # listen for query
             output = self.RequestHandler.handle_request(
                 query)  # handle request
-
+             ###   Check for API Speech response ###
             try:
                 actionOutput = output['result']['fulfillment']['speech']
             except Exception:
                 actionOutput = 'Sorry, my neural core seems to have malfunctioned.'
-
+            
             print(actionOutput)
             if actionOutput == '':
                 print('No API Speech Response')
 
                 action = output['result']['action']
-
+             
                 for a in self.actions:
                     if a in action:
                         actionOutput = self.actions[a](output['result'])
