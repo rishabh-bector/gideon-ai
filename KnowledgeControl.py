@@ -9,6 +9,15 @@ import RequestControl as RC
 import wikipedia
 import pyjokes
 
+'''
+KnowledgeController Supports:
+
+- Querying Google
+- Querying Wikipedia
+- Weather Forecasting
+
+'''
+
 
 class KnowledgeController:
 
@@ -116,43 +125,3 @@ class KnowledgeController:
             w.get_humidity()) + ' percent. Status is ' + w.get_status()
 
         return output
-
-    def quiz(self, response):
-
-        name = response['parameters']['quizname']
-        setid = 0
-        for sett in self.quizlet.api.search.sets.get(params={'q': name})[
-                'sets']:
-            if sett['has_images'] == False:
-                setid = sett['id']
-        if not setid:
-            setid = self.quizlet.api.search.sets.get(params={'q': name})[
-                'sets'][0]['id']
-        pprint(setid)
-        my_set = self.quizlet.api.sets.get(setid)
-        my_terms = my_set['terms']
-        setcount = my_set["term_count"]
-        x = randint(0, setcount - 1)
-        for i in range(setcount):
-            x += 1
-            if x == setcount:
-                x = 0
-            term = my_terms[x]['term']
-            definition = my_terms[x]['definition']
-            self.Speech.say("Definition,,,,, " +
-                            definition + " ....Whats the term?")
-            answer = self.Speech.listen()
-            print(answer)
-            if answer.lower() in term.lower():
-                self.Speech.say("You are correct! The term is " + term)
-            elif answer.lower() == "interrupt":
-                query = self.Speech.listen()
-                self.RequestHandler.handle_request(query)
-            else:
-                self.Speech.say("Incorrect! The term is " + term)
-            if answer.lower() == 'stop playing':
-                return 'Ok. Good Luck!'
-        return "Good luck!"
-
-    def getJoke(self, response):
-        return pyjokes.get_joke()

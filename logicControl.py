@@ -1,8 +1,11 @@
 import apiai
 import json
+
 import SpeechControl as SC
 import KnowledgeControl as KC
 import RequestControl as RC
+import MiscControl as MC
+
 import re
 
 
@@ -15,13 +18,14 @@ class LogicController:
         self.Speech = SC.SpeechController(self.name, self.language)
         self.Knowledge = KC.KnowledgeController()
         self.RequestHandler = RC.RequestController()
+        self.Misc = MC.MiscController()
 
         self.actions = {'weather.search': self.Knowledge.getWeather,
                         'wisdom': self.Knowledge.ask,
-                        'quizlet': self.Knowledge.quiz,
+                        'quizlet': self.Misc.quiz,
                         'switchmode': self.Speech.switchmode,
                         'sayagain': self.Speech.sayagain,
-                        'getjoke': self.Knowledge.getJoke}
+                        'getjoke': self.Misc.getJoke}
 
     def run(self):
         while True:
