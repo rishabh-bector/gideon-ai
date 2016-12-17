@@ -2,11 +2,12 @@ import speech_recognition as sr
 import subprocess
 from gtts import gTTS
 import os
-from pygame import mixer
 import random
 
 if os.name == 'nt':
-    subprocess.call("rmdir audio", shell=True)
+    from pygame import mixer
+    mixer.init(30000)
+    subprocess.call("rd /S /Q audio", shell=True)
     subprocess.call("md audio", shell=True)
 elif os.name == 'posix':
     subprocess.call("rm -rf audio;mkdir -p audio", shell=True)
@@ -65,11 +66,10 @@ class SpeechController:
     def say(self, txt):
         txt = str(txt)
         self.lastsaid = txt
-        mixer.init(30000)
         print(txt)
         try:
             if os.name == 'nt':
-                audio_file = "audio\hello_" + \
+                audio_file = r"audio\hello_" + \
                     str(random.randint(1, 1000)) + ".mp3"
                 tts = gTTS(text=txt, lang="en-uk")
                 tts.save(audio_file)

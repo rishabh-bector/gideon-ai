@@ -1,6 +1,6 @@
 import apiai
 import json
-
+from pygame import time
 from gideonai import SpeechControl as SC
 from gideonai import KnowledgeControl as KC
 from gideonai import RequestControl as RC
@@ -30,6 +30,7 @@ class LogicController:
 
     def run(self):
         while True:
+            time.delay(1000)
             query = self.Speech.listenForStart()  # listen for query
             if query == '' or query == 'error:audio':
                 continue
@@ -53,10 +54,11 @@ class LogicController:
                 for a in self.actions:
                     if a in action:
                         actionOutput = self.actions[a](output['result'])
-            try:
-                self.Speech.say(actionOutput)
-            except Exception:
-                self.Speech.say('Nothing to say')
+            if actionOutput.lower() != "pass":
+                try:
+                    self.Speech.say(actionOutput)
+                except Exception:
+                    self.Speech.say('Nothing to say')
 
 Brain = LogicController('Gideon', 'en-uk')
 if __name__ == "__main__":
