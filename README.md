@@ -34,4 +34,6 @@ The default input mode is 'input'. Hit enter, then say something into the mic. I
 
 * Make small talk
 
+* Play Music
+
 
