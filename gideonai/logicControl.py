@@ -25,7 +25,8 @@ class LogicController:
                         'quizlet': self.Misc.quiz,
                         'switchmode': self.Speech.switchmode,
                         'sayagain': self.Speech.sayagain,
-                        'getjoke': self.Misc.getJoke}
+                        'getjoke': self.Misc.getJoke,
+                        'getmusic': self.Misc.getMusic}
 
     def run(self):
         while True:
