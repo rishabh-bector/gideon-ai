@@ -3,8 +3,8 @@ mixer.init()
 mixer.music.load(r'..\audio\song.mp3')
 mixer.music.play()
 print("\n\n")
-while True:
-    try:
+try:
+    while True:
         pass
-    except KeyboardInterrupt:
-        break
+except KeyboardInterrupt:
+    pass
