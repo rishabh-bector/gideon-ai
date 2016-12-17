@@ -30,7 +30,7 @@ class LogicController:
 
     def run(self):
         while True:
-            time.delay(1000)
+            time.delay(150)
             query = self.Speech.listenForStart()  # listen for query
             if query == '' or query == 'error:audio':
                 continue
