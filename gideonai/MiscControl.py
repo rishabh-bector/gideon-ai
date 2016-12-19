@@ -11,6 +11,11 @@ import pyjokes
 import pafy
 from bs4 import BeautifulSoup
 import subprocess
+from pydub import AudioSegment
+from threading import Thread
+
+if os.name == 'nt':
+    from pygame import mixer
 
 
 class MiscController:
