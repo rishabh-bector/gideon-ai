@@ -1,6 +1,7 @@
 import requests
 import json
 import pyowm
+import os
 from pprint import pprint
 from quizlet import QuizletClient
 from random import randint
@@ -100,10 +101,32 @@ class MiscController:
             if s.extension == 'm4a':
                 cstream = s
                 break
+        try:
+            if os.name == 'posix':
+                cstream.download('audio/song.m4a')
+                subprocess.call(['ffmpeg', '-y', '-i', 'audio/song.m4a', '-acodec',
+                                 'libmp3lame', '-ab', '256k', 'audio/song.mp3'])
 
-        cstream.download('song.m4a')
+                return_code = subprocess.call(['afplay', 'audio/song.mp3'])
+            elif os.name == 'nt':
+                try:
+                    os.remove(r"audio\song.m4a")
+                except FileNotFoundError:
+                    pass
+                cstream.download(r"audio\song.m4a")
+                m4a_file = AudioSegment.from_file(r"audio\song.m4a", "m4a")
+                mp3_file = m4a_file.export(r"audio\song.mp3", format="mp3")
+                mp3_file.close()
+                # del mp3_file
+                process = Thread(target=self.playMusic, name='song',
+                                 args=(r'audio\song.mp3',))
+                process.start()
+                # process.join()
+                return "pass"
 
-        subprocess.call(['ffmpeg', '-y', '-i', 'song.m4a', '-acodec',
-                         'libmp3lame', '-ab', '256k', 'song.mp3'])
+        except KeyboardInterrupt:
+            mixer.music.stop()
+            # i don't know how to stop afplay
 
-        return_code = subprocess.call(['afplay', 'song.mp3'])
+    def playMusic(self, fname):
+        subprocess.call("cd gideonai && python playsong.py", shell=True)

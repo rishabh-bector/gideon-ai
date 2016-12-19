@@ -30,6 +30,7 @@ class LogicController:
 
     def run(self):
         while True:
+            time.delay(150)
             query = self.Speech.listenForStart()  # listen for query
             if query == '' or query == 'error:audio':
                 # print('bad')
@@ -54,10 +55,11 @@ class LogicController:
                 for a in self.actions:
                     if a in action:
                         actionOutput = self.actions[a](output['result'])
-            try:
-                self.Speech.say(actionOutput)
-            except Exception:
-                self.Speech.say('Nothing to say')
+            if actionOutput.lower() != "pass":
+                try:
+                    self.Speech.say(actionOutput)
+                except Exception:
+                    self.Speech.say('Nothing to say')
 
 Brain = LogicController('Gideon', 'en-uk')
 if __name__ == "__main__":

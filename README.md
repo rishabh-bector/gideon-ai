@@ -10,7 +10,7 @@ __Installation__:
 
 Make sure you have git installed, then run these commands.
 
-`git clone https://github.com/rishabh-bector/gideon-ai/`
+`git clone https://github.com/rishabh-bector/gideon-ai.git`
 
 `cd gideon-ai`
 

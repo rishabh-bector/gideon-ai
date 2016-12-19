@@ -10,5 +10,5 @@ setup(
     keywords="gideon apiai bot intelligent",
     packages=find_packages(),
     install_requires=['gtts', 'wikipedia', 'pygame',
-                      'apiai', 'speechrecognition', 'quizlet-api', 'pyjokes', 'bs4', 'pafy'],
+                      'apiai', 'speechrecognition', 'quizlet-api', 'pyjokes', 'bs4', 'pafy', 'lxml', 'youtube-dl', 'pydub'],
 )
