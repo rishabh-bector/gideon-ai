@@ -47,7 +47,7 @@ class SpeechController:
                 print(micIn)
                 return micIn
             return x
-        if self.inputmode == 'continous':
+        if self.inputmode == 'continuous':
             micIn = self.listen().lower()
             print(micIn)
             return micIn
@@ -61,6 +61,7 @@ class SpeechController:
             return micIn
         else:
             self.inputmode == 'input'
+            return 'error:audio'
 
     def say(self, txt):
         txt = str(txt)

@@ -32,6 +32,7 @@ class LogicController:
         while True:
             query = self.Speech.listenForStart()  # listen for query
             if query == '' or query == 'error:audio':
+                # print('bad')
                 continue
             output = self.RequestHandler.handle_request(
                 query)  # handle request
