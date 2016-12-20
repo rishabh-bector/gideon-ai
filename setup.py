@@ -2,7 +2,7 @@ from setuptools import setup
 import os
 setup(
     name="gideonai",
-    version="0.6.9",
+    version="4.2.0",
     author="Rishabh Bector and Leo Orshansky",
     author_email="bector.rishabh@gmail.com",
     description=("An intelligent bot written in Python"),

@@ -98,7 +98,9 @@ class MiscController:
 
         video = pafy.new(vids[0])
         streams = video.audiostreams
-
+        if not os.path.isdir('./gideonai'):
+            os.chdir(input(
+                'enter the path of your gideonai installation (where you cloned the repo): '))
         cstream = None
 
         for s in streams:
