@@ -1,3 +1,4 @@
+from .LogicControl import Brain
 
 
 def main():
