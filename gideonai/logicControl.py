@@ -26,7 +26,8 @@ class LogicController:
                         'switchmode': self.Speech.switchmode,
                         'sayagain': self.Speech.sayagain,
                         'getjoke': self.Misc.getJoke,
-                        'getmusic': self.Misc.getMusic}
+                        'getmusic': self.Misc.getMusic,
+                        'return': self.Misc.retrn}
 
     def run(self):
         while True:
@@ -54,7 +55,11 @@ class LogicController:
 
                 for a in self.actions:
                     if a in action:
-                        actionOutput = self.actions[a](output['result'])
+                        if self.actions[a].__code__.co_argcount == 2:
+                            actionOutput = self.actions[a](output['result'])
+                        elif self.actions[a].__code__.co_argcount == 3:
+                            actionOutput = self.actions[a](
+                                self.actions, output['result'])
             if actionOutput.lower() != "pass":
                 try:
                     self.Speech.say(actionOutput)

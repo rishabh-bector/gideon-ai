@@ -35,9 +35,11 @@ class SpeechController:
         except sr.UnknownValueError:
             return 'Error:Audio'
 
-    def sayagain(self, msg):
+    def sayagain(self):
+        with open('log.txt', 'r') as openfile:
+            self.lastsaid = openfile.readlines()[-1][:-2]
         self.say(self.lastsaid)
-        return msg
+        return ""
 
     def listenForStart(self):
         if self.inputmode == 'input':
@@ -66,7 +68,8 @@ class SpeechController:
 
     def say(self, txt):
         txt = str(txt)
-        self.lastsaid = txt
+        with open('log.txt', 'a') as openfile:
+            openfile.write(txt + "\n")
         print(txt)
         try:
             if os.name == 'nt':

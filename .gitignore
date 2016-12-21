@@ -204,6 +204,7 @@ develop-eggs/
 *.mp3
 # Installer logs
 pip-log.txt
+log.txt
 
 # Unit test / coverage reports
 .coverage

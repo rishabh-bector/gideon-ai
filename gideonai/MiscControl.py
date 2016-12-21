@@ -29,7 +29,7 @@ class MiscController:
         self.RequestHandler = RC.RequestController()
         self.junkQueries = {'whatis': ['what is', 'who is']}
 
-    def quiz(self, response):
+    def quiz(self, actions, response):
 
         name = response['parameters']['quizname']
         setid = 0
@@ -53,19 +53,28 @@ class MiscController:
             definition = my_terms[x]['definition']
             self.Speech.say("Definition,,,,, " +
                             definition + " ....Whats the term?")
-            answer = self.Speech.listen()
+            answer = self.Speech.listenForStart()
             print(answer)
             if answer.lower() in term.lower():
                 self.Speech.say("You are correct! The term is " + term)
             elif answer.lower() == "interrupt":
                 query = self.Speech.listen()
-                self.RequestHandler.handle_request(query)
+                msg = self.RequestHandler.handle_request(query)
+                try:
+                    msg = actions.get(msg["result"]["action"], str)() or msg["result"]["fulfillment"]["speech"] or "sorry, couldn't find a response..."
+                except KeyError or NameError:
+                    msg = ""
+                if ' '.split(msg)[0] == "exec":
+                    exec(code[1])
+                else:
+                    self.Speech.say(msg)
             else:
                 self.Speech.say("Incorrect! The term is " + term)
             if answer.lower() == 'stop playing':
                 return 'Ok. Good Luck!'
         return "Good luck!"
-
+    def retrn(self):
+        return "exec return"
     def getJoke(self, response):
         return pyjokes.get_joke()
 
