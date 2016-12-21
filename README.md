@@ -18,9 +18,7 @@ Make sure you have git installed, then run these commands.
 
 __Usage__:
 
-run `python -m gideonai`
-# or
-`gideonai` 
+run `python -m gideonai` __or__ `gideonai` 
 
 The default input mode is 'input'. Hit enter, then say something into the mic. If you don't have access to a mic then type what you want to say and press enter. Have Fun!
 
