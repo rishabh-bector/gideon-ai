@@ -14,5 +14,6 @@ setup(
         "console_scripts": ['gideonai = gideonai.__main__:main']
     },
     install_requires=['gtts', 'wikipedia', 'pygame',
-                      'apiai', 'speechrecognition', 'quizlet-api', 'pyjokes', 'bs4', 'pafy', 'lxml', 'youtube-dl', 'pydub'],
+                      'apiai', 'speechrecognition', 'quizlet', 'pyjokes', 'bs4', 'pafy', 'lxml', 'youtube-dl', 'pydub'],
+    dependency_links=['https://github.com/s-alexey/quizlet/tarball#egg=quizlet-6.9']
 )
